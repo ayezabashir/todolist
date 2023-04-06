@@ -1,16 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
-
 :root {
   --container-height: 500px;
   --contaier-width: 400px;
   --header-height: 150px;
 }
-
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Ubuntu", monospace;
 }
 html {
   font-size: 20px;
@@ -25,16 +21,12 @@ body {
 }
 
 .container {
-  background-color: antiquewhite;
   width: var(--contaier-width);
   height: var(--container-height);
-
   position: relative;
   overflow: hidden;
 }
 header {
-  width: 100%;
-  height: var(--header-height);
   background-color: #dfdbe5;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
   border-radius: 5px 5px 0 0;
@@ -77,10 +69,6 @@ header {
   border-left: 0px;
   cursor: pointer;
 }
-.new-todo form button:hover {
-  text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.8);
-}
-
 #todos-list {
   height: calc(var(--container-height) - var(--header-height));
   background-color: #fff;
@@ -89,7 +77,6 @@ header {
   overflow: scroll;
   border-radius: 0 0 5px 5px;
 }
-
 #todos-list .todo {
   display: flex;
   align-items: center;
@@ -115,35 +102,27 @@ header {
   color: grey;
 }
 #todos-list .todo .bi-pencil-square {
-  color: rgb(31, 177, 48);
+  color: rgba(31, 177, 48, 0.603);
 }
 #todos-list .todo .bi-trash {
-  color: rgb(236, 82, 82);
+  color: rgb(231, 110, 110);
   margin: 0;
 }
-
 .notification {
   position: absolute;
-
   width: calc(3 * var(--contaier-width) / 4);
   height: 60px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   opacity: 0.9;
-
   border-radius: 8px;
   background-color: rgb(233, 81, 81);
   top: 10px;
   right: calc(-3 * var(--contaier-width) / 4);
-
   color: #fff;
-
   transition: 300ms right ease-in-out;
 }
-
 .notif-enter {
   right: 10px;
 }
