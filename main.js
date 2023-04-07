@@ -74,10 +74,15 @@ todoListElement.addEventListener('click', (event) => {
 
     action === 'check' && checkTodo(todoId);
     // action === "edit" && editTodo(todoId);
-    // action === "delete" && deleteTodo(todoId);
+    action === "delete" && deleteTodo(todoId);
 
     console.log(todoId, action);
 })
+
+function deleteTodo(id) {
+    todos.splice(id, 1);
+    addToList();
+}
 
 function checkTodo(id) {
     todos = todos.map((todo, index) => {
