@@ -59,3 +59,15 @@ function addToList() {
     `
     })
 }
+
+// Event Listener on todos
+todoListElement.addEventListener('click', (event) => {
+    const target = event.target;
+    const parentElement = target.parentElement;
+
+    if (parentElement.className !== "todo") return;
+
+    const todo = parentElement;
+    const todoId = Number(todo.id);
+    console.log(todoId);
+})
