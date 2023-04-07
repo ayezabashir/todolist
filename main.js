@@ -4,7 +4,7 @@ const todoInput = document.getElementById("newtodo");
 const todoListElement = document.getElementById("todos-list");
 
 // saving the todos in array
-const todos = [];
+let todos = [];
 
 // form submission
 form.addEventListener("submit", function (event) {
@@ -27,12 +27,11 @@ function saveToDo() {
         alert('duplicates cannot be added');
     }
     else {
-        const todo = {
+        todos.push({
             value: todoValue,
             checked: false,
             color: '#' + Math.floor(Math.random() * 16777215).toString(16)
-        }
-        todos.push(todo);
+        });
         todoInput.value = '';
         console.log(todos);
     }
@@ -51,10 +50,11 @@ function addToList() {
           <i 
           class="bi ${todo.checked ? 'bi-check-circle-fill' : 'bi-circle'}"
           style = "color: ${todo.color}"
+          data-action="check"
           ></i>
-          <p>${todo.value}</p>
-          <i class="bi bi-pencil-square"></i>
-          <i class="bi bi-trash"></i>
+          <p data-action="check">${todo.value}</p>
+          <i class="bi bi-pencil-square" data-action="edit"></i>
+          <i class="bi bi-trash" data-action="delete"></i>
         </div>
     `
     })
@@ -69,5 +69,33 @@ todoListElement.addEventListener('click', (event) => {
 
     const todo = parentElement;
     const todoId = Number(todo.id);
-    console.log(todoId);
+
+    const action = target.dataset.action;
+
+    action === 'check' && checkTodo(todoId);
+    // action === "edit" && editTodo(todoId);
+    // action === "delete" && deleteTodo(todoId);
+
+    console.log(todoId, action);
 })
+
+function checkTodo(id) {
+    todos = todos.map((todo, index) => {
+        if (index === id) {
+            return {
+                value: todo.value,
+                color: todo.color,
+                checked: !todo.checked
+            }
+        }
+        else {
+            return {
+                value: todo.value,
+                color: todo.color,
+                checked: todo.checked
+            }
+        }
+    })
+
+    addToList();
+}
