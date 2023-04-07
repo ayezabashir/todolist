@@ -37,7 +37,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
 }
 .new-todo {
   width: 100%;
@@ -57,7 +56,6 @@ header {
   outline: transparent;
   padding-left: 0.5rem;
   font-size: 1rem;
-  color: #fff;
 }
 .new-todo form button {
   width: 60px;
@@ -71,7 +69,6 @@ header {
 }
 #todos-list {
   height: calc(var(--container-height) - var(--header-height));
-  background-color: #fff;
   padding: 0.5rem;
   border: 1px solid rgb(219, 219, 219);
   overflow: scroll;
