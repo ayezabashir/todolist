@@ -4,17 +4,20 @@ const todoInput = document.getElementById("newtodo");
 const todoListElement = document.getElementById("todos-list");
 const notifcation = document.querySelector(".notification");
 
-// saving the todos in array
-let todos = [];
+// saving the todos in array OR getting from local storage
+let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
 let editTodoId = -1;
 
+// 1st Render
 addToList();
+
 // form submission
 form.addEventListener("submit", function (event) {
     event.preventDefault();
     saveToDo();
     addToList();
+    localStorage.setItem('todos', JSON.stringify(todos));
 })
 
 // function to add todo
@@ -64,6 +67,10 @@ function saveToDo() {
 
 // Rendering to do to user interface
 function addToList() {
+    if (todos.length === 0) {
+        todoListElement.innerHTML = "<center>Nothing to do!</center>";
+        return
+    }
     // clearing element before re-rendering
     todoListElement.innerHTML = '';
 
@@ -77,7 +84,7 @@ function addToList() {
           style = "color: ${todo.color}"
           data-action="check"
           ></i>
-          <p data-action="check">${todo.value}</p>
+          <p class="${todo.checked ? 'checked' : ''}" data-action="check">${todo.value}</p>
           <i class="bi bi-pencil-square" data-action="edit"></i>
           <i class="bi bi-trash" data-action="delete"></i>
         </div>
@@ -88,7 +95,7 @@ function addToList() {
 // Event Listener on todos
 todoListElement.addEventListener('click', (event) => {
     const target = event.target;
-    const parentElement = target.parentElement;
+    const parentElement = target.parentNode;
 
     if (parentElement.className !== "todo") return;
 
@@ -112,6 +119,8 @@ function deleteTodo(id) {
     todos.splice(id, 1);
     editTodoId = -1;
     addToList();
+    localStorage.setItem('todos', JSON.stringify(todos));
+
 }
 
 function checkTodo(id) {
@@ -133,6 +142,8 @@ function checkTodo(id) {
     })
 
     addToList();
+    localStorage.setItem('todos', JSON.stringify(todos));
+
 }
 
 function showNotif(txt) {
