@@ -2,6 +2,7 @@
 const form = document.getElementById("todoform");
 const todoInput = document.getElementById("newtodo");
 const todoListElement = document.getElementById("todos-list");
+const notifcation = document.querySelector(".notification");
 
 // saving the todos in array
 let todos = [];
@@ -25,9 +26,10 @@ function saveToDo() {
     );
 
     if (isEmpty) {
-        alert('empty value can not be added');
+        showNotif("Text can not be empty!");
+
     } else if (isDuplicate) {
-        alert('duplicates cannot be added');
+        showNotif("Already exists!");
     }
     else {
         if (editTodoId >= 0) {
@@ -131,4 +133,12 @@ function checkTodo(id) {
     })
 
     addToList();
+}
+
+function showNotif(txt) {
+    notifcation.innerHTML = txt;
+    notifcation.classList.add("notif-enter");
+    setTimeout(() => {
+        notifcation.classList.remove("notif-enter");
+    }, 2000)
 }

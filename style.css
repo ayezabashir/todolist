@@ -108,7 +108,7 @@ header {
 .notification {
   position: absolute;
   width: calc(3 * var(--contaier-width) / 4);
-  height: 60px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
