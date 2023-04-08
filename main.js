@@ -6,6 +6,9 @@ const todoListElement = document.getElementById("todos-list");
 // saving the todos in array
 let todos = [];
 
+let editTodoId = -1;
+
+addToList();
 // form submission
 form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -27,13 +30,33 @@ function saveToDo() {
         alert('duplicates cannot be added');
     }
     else {
-        todos.push({
-            value: todoValue,
-            checked: false,
-            color: '#' + Math.floor(Math.random() * 16777215).toString(16)
-        });
+        if (editTodoId >= 0) {
+            todos = todos.map((todo, index) => {
+                if (index === editTodoId) {
+                    return {
+                        value: todoValue,
+                        checked: todo.checked,
+                        color: todo.color
+                    }
+
+                } else {
+                    return {
+                        value: todo.value,
+                        checked: todo.checked,
+                        color: todo.color
+                    }
+                }
+            })
+            editTodo = -1;
+        } else {
+            todos.push({
+                value: todoValue,
+                checked: false,
+                color: '#' + Math.floor(Math.random() * 16777215).toString(16)
+            });
+        }
         todoInput.value = '';
-        console.log(todos);
+        // console.log(todos);
     }
 }
 
@@ -73,14 +96,19 @@ todoListElement.addEventListener('click', (event) => {
     const action = target.dataset.action;
 
     action === 'check' && checkTodo(todoId);
-    // action === "edit" && editTodo(todoId);
+    action === "edit" && editTodo(todoId);
     action === "delete" && deleteTodo(todoId);
 
-    console.log(todoId, action);
 })
+
+function editTodo(id) {
+    todoInput.value = todos[id].value;
+    editTodoId = id;
+}
 
 function deleteTodo(id) {
     todos.splice(id, 1);
+    editTodoId = -1;
     addToList();
 }
 
