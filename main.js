@@ -52,7 +52,7 @@ function saveToDo() {
                     }
                 }
             })
-            editTodo = -1;
+            editTodoId = -1;
         } else {
             todos.push({
                 value: todoValue,
